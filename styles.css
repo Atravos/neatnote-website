@@ -416,3 +416,26 @@ footer {
         display: none;
     }
 }
+
+/* Version number styling */
+.version {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--primary);
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+/* Disabled button styling */
+.btn.disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Make sure Linux button doesn't get hover effects when disabled */
+.download-card .btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
