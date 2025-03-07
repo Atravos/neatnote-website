@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeatNote - Lightweight Note-Taking Application</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/logo.svg" alt="NeatNote Logo">
+                <span>NeatNote</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="#download" class="btn">Download Now</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Simplify Your Note-Taking</h1>
+            <p>Lightweight yet powerful. NeatNote helps you organize your thoughts without the bloat of complex note-taking apps.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn">Download Free</a>
+                <a href="#features" class="btn btn-outline">Learn More</a>
+            </div>
+            <div class="hero-image">
+                <img src="images/screenshots/main-app.png" alt="NeatNote App Interface">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Features</h2>
+                <p>Discover why NeatNote is the perfect balance between simplicity and functionality</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3>Intuitive Organization</h3>
+                    <p>Create folders and subfolders to organize your notes exactly how you want. Drag and drop for easy file management.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
+                            <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3>Distraction-Free Writing</h3>
+                    <p>Focus on your content with a clean, minimalist interface that keeps the writing experience simple and enjoyable.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 22C6.49 22 2 17.51 2 12S6.49 2 12 2s10 4.04 10 9c0 3.31-2.69 6-6 6h-1.77c-.28 0-.5.22-.5.5 0 .12.05.23.13.33.41.47.64 1.06.64 1.67 0 1.38-1.12 2.5-2.5 2.5zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8c.28 0 .5-.22.5-.5 0-.16-.08-.28-.14-.35-.41-.46-.63-1.05-.63-1.65 0-1.38 1.12-2.5 2.5-2.5H16c2.21 0 4-1.79 4-4 0-3.86-3.59-7-8-7z"/>
+                            <circle cx="6.5" cy="11.5" r="1.5"/>
+                            <circle cx="9.5" cy="7.5" r="1.5"/>
+                            <circle cx="14.5" cy="7.5" r="1.5"/>
+                            <circle cx="17.5" cy="11.5" r="1.5"/>
+                        </svg>
+                    </div>
+                    <h3>Multiple Themes</h3>
+                    <p>Choose from Light, Dark, Blue, or Sepia themes to customize your experience and reduce eye strain during long sessions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                        </svg>
+                    </div>
+                    <h3>Lightweight & Fast</h3>
+                    <p>Enjoy instant startup and snappy performance. NeatNote uses minimal system resources while still providing all the features you need.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Privacy-Focused</h3>
+                    <p>Your notes are stored locally on your device. No account required, no data sent to the cloud unless you choose to.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </div>
+                    <h3>Cross-Platform</h3>
+                    <p>Available for Windows, macOS, and Linux. Take your notes with you no matter which operating system you use.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-title">
+                <h2>See NeatNote in Action</h2>
+                <p>Take a closer look at our clean, intuitive interface</p>
+            </div>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="images/screenshots/light-theme.png" alt="Light Theme Screenshot">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/screenshots/dark-theme.png" alt="Dark Theme Screenshot">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/screenshots/folder-view.png" alt="Folder Organization Screenshot">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/screenshots/settings-view.png" alt="Settings Screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <div class="section-title">
+                <h2>Download NeatNote</h2>
+                <p>Available for all major platforms. 100% free.</p>
+            </div>
+            <div class="download-options">
+                <div class="download-card">
+                    <svg class="platform-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: #0078D6;">
+                        <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                    </svg>
+                    <h3>Windows</h3>
+                    <a href="#" class="btn">Download</a>
+                </div>
+                <div class="download-card">
+                    <svg class="platform-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: #999;">
+                        <path d="M12 22c3.859 0 7-3.141 7-7s-3.141-7-7-7c-3.86 0-7 3.141-7 7s3.14 7 7 7zm0-12.5c3.033 0 5.5 2.467 5.5 5.5s-2.467 5.5-5.5 5.5-5.5-2.467-5.5-5.5 2.467-5.5 5.5-5.5zm.203-9.5c-3.827 0-6.941 3.113-6.941 6.941 0 .364.033.728.098 1.091.27.3.3.75.3.075.239-.02.457.138.477.377.019.239-.138.458-.377.477-.6.005-.105.005-.105.006-.38-.423-.098-.84-.098-1.249C5.257 3.814 8.317.75 12.203.75c3.885 0 6.945 3.064 6.945 6.95 0 .39-.019.788-.089 1.19-.02 0-.097-.005-.097-.005-.239-.019-.397-.238-.378-.477.02-.239.238-.397.477-.377.066-.024.066-.074.096-.074.055-.328.084-.66.084-.988 0-3.829-3.113-6.941-6.941-6.941z"/>
+                    </svg>
+                    <h3>macOS</h3>
+                    <a href="#" class="btn">Download</a>
+                </div>
+                <div class="download-card">
+                    <svg class="platform-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: #333;">
+                        <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489.117.779.567 1.676 1.464 1.676.946 0 1.751-.916 1.787-1.665.023-.502-.192-1.092-.34-1.623-.396-1.396-.63-2.291.095-3.795 1.045-2.167 1.637-3.859 1.637-5.475 0-2.054.812-3.425 1.426-4.022.661-.651 1.555-1.052 2.115-1.052.564 0 1.487.408 2.139 1.08.602.637 1.33 1.996 1.33 3.994 0 1.616.635 3.308 1.713 5.475.692 1.383.488 2.347.103 3.795-.147.533-.363 1.118-.342 1.624.035.747.843 1.663 1.786 1.663.908 0 1.35-.894 1.465-1.676.124-.805-.008-1.657-.287-2.489-.589-1.771-1.823-3.47-2.707-4.521-.75-1.067-.975-1.928-1.051-3.02-.063-1.491 1.05-5.965-3.175-6.298C12.8.008 12.643 0 12.504 0z"/>
+                    </svg>
+                    <h3>Linux</h3>
+                    <a href="#" class="btn">Download</a>
+                </div>
+                <div class="download-card">
+                    <svg class="platform-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: #333;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    <h3>Source Code</h3>
+                    <a href="https://github.com/Atravos/neatnote" class="btn">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Got questions? We've got answers.</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Is NeatNote really free?</div>
+                    <div class="faq-answer">
+                        <p>Yes, NeatNote is completely free to download and use. We believe in providing a high-quality note-taking experience without any paywalls. If you find the app useful, we welcome donations to support ongoing development.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Where are my notes stored?</div>
+                    <div class="faq-answer">
+                        <p>All your notes are stored locally on your device. NeatNote does not use cloud storage, ensuring your data remains private and accessible even without an internet connection.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I back up my notes?</div>
+                    <div class="faq-answer">
+                        <p>NeatNote stores all your notes in a folder within your user directory. You can back up this folder manually or use your preferred backup solution. In future updates, we plan to add automatic backup functionality.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I sync my notes across devices?</div>
+                    <div class="faq-answer">
+                        <p>Currently, NeatNote does not include built-in sync functionality. However, you can use third-party services like Dropbox or Google Drive by placing your notes folder within your synced directory.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What file formats does NeatNote support?</div>
+                    <div class="faq-answer">
+                        <p>NeatNote currently works with plain text (.txt) files. Support for Markdown and other formats is planned for future updates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have questions or feedback? We'd love to hear from you.</p>
+            </div>
+            <form class="contact-form" action="https://formspree.io/f/your-formspree-id" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>NeatNote</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#screenshots">Screenshots</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="https://github.com/Atravos/neatnote">GitHub</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="https://github.com/Atravos">GitHub</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="mailto:contact@theneatnote.com">Email Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 NeatNote. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
