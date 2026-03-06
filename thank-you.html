@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You — NeatNote</title>
+    <link rel="icon" href="Images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #07070e;
+            --bg-raised: #0d0d17;
+            --bg-card: #111119;
+            --cream: #ede9df;
+            --text: #dbd7cd;
+            --text-secondary: #908c82;
+            --text-muted: #5a5850;
+            --gold: #c8944a;
+            --gold-light: #e4b770;
+            --gold-dim: rgba(200, 148, 74, 0.1);
+            --gold-glow: rgba(200, 148, 74, 0.2);
+            --gold-mid: rgba(200, 148, 74, 0.35);
+            --green: #5ce0a0;
+            --border: rgba(255, 255, 255, 0.05);
+            --border-light: rgba(255, 255, 255, 0.09);
+            --r-md: 14px; --r-lg: 20px; --r-full: 100px;
+            --serif: 'Fraunces', Georgia, serif;
+            --sans: 'Manrope', system-ui, sans-serif;
+        }
+
+        html { -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; overflow-x: hidden; }
+        a { color: inherit; text-decoration: none; }
+
+        body::before {
+            content: ''; position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+            width: 800px; height: 600px;
+            background: radial-gradient(ellipse at center, var(--gold-mid) 0%, transparent 65%);
+            pointer-events: none; opacity: .3;
+        }
+
+        body::after {
+            content: ''; position: fixed; inset: 0; z-index: -1;
+            pointer-events: none; opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
+        }
+
+        .card {
+            position: relative; z-index: 1;
+            max-width: 560px; width: 100%;
+            background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: var(--r-lg); padding: 56px 48px; text-align: center;
+            box-shadow: 0 40px 80px rgba(0,0,0,.4);
+        }
+
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            border-radius: var(--r-lg) var(--r-lg) 0 0;
+        }
+
+        .check-circle {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: var(--gold-dim); border: 2px solid var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 28px;
+            animation: pop 0.5s cubic-bezier(.16,1,.3,1) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .check-circle svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+        h1 {
+            font-family: var(--serif); font-size: 32px; font-weight: 800;
+            color: var(--cream); letter-spacing: -.02em; margin-bottom: 10px;
+        }
+
+        .subtitle { font-size: 16px; color: var(--text-secondary); margin-bottom: 36px; line-height: 1.7; }
+
+        .downloads-label {
+            font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .14em; color: var(--gold); margin-bottom: 16px;
+        }
+
+        .download-buttons { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+
+        .dl-btn {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            padding: 16px 24px; border-radius: var(--r-full);
+            font-weight: 700; font-size: 15px; font-family: var(--sans);
+            border: none; cursor: pointer; transition: transform .2s, box-shadow .2s;
+        }
+
+        .dl-btn:hover { transform: translateY(-2px); }
+
+        .dl-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+        .dl-btn.windows {
+            background: var(--gold); color: var(--bg);
+        }
+        .dl-btn.windows:hover { box-shadow: 0 12px 36px var(--gold-glow); }
+
+        .dl-btn.mac {
+            background: transparent; color: var(--cream);
+            border: 1px solid var(--border-light);
+        }
+        .dl-btn.mac:hover { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.03); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+
+        .note {
+            font-size: 13px; color: var(--text-muted); line-height: 1.6;
+            padding-top: 24px; border-top: 1px solid var(--border);
+        }
+
+        .back-link {
+            display: inline-block; margin-top: 28px;
+            font-size: 14px; color: var(--text-muted); transition: color .2s;
+        }
+        .back-link:hover { color: var(--gold-light); }
+
+        @media (max-width: 480px) {
+            .card { padding: 40px 28px; }
+            h1 { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="check-circle">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+
+    <h1>Thank you!</h1>
+    <p class="subtitle">Your purchase is complete. Download NeatNote for your platform below — your license covers both Windows and macOS.</p>
+
+    <div class="downloads-label">Download NeatNote v1.0.5</div>
+
+    <div class="download-buttons">
+        <a href="https://github.com/Atravos/neatnote/releases/download/v1.0.5/NeatNote-Setup-1.0.5.exe" class="dl-btn windows">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            Download for Windows
+        </a>
+        <a href="https://github.com/Atravos/neatnote/releases/download/v1.0.5/NeatNote-1.0.5-arm64.dmg" class="dl-btn mac">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download for macOS
+        </a>
+    </div>
+
+    <p class="note">Both downloads are included with your purchase. You can return to this page anytime — a copy of the download links has also been sent to your email.</p>
+
+    <a href="index.html" class="back-link">&larr; Back to NeatNote</a>
+</div>
+
+</body>
+</html>
