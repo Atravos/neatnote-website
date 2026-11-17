@@ -3,101 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeatNote — The Note-Taking App That's Just Right</title>
-    <link rel="icon" href="Images/favicon.ico">
+    <title>NeatNote — Notes Without the Nonsense</title>
+    <meta name="description" content="NeatNote is a fast, private, local-first note-taking app for Windows and macOS. Folders, rich text, full-text search and Markdown export. Open source. One-time $9.99 purchase — no subscription.">
+    <meta name="theme-color" content="#07080d">
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NeatNote — Notes without the nonsense">
+    <meta property="og:description" content="Fast, private, local-first notes for Windows &amp; macOS. Open source. $9.99 once, yours forever.">
+    <meta property="og:url" content="https://theneatnote.com/">
+    <meta property="og:image" content="https://theneatnote.com/Images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NeatNote — Notes without the nonsense">
+    <meta name="twitter:description" content="Fast, private, local-first notes for Windows &amp; macOS. Open source. $9.99 once, yours forever.">
+    <meta name="twitter:image" content="https://theneatnote.com/Images/og.png">
+
+    <link rel="canonical" href="https://theneatnote.com/">
+    <link rel="icon" href="Images/favicon.ico" sizes="any">
+    <link rel="icon" href="Images/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="Images/apple-touch-icon.png">
+    <link rel="preload" as="image" href="Images/app/editor-light.webp" imagesrcset="Images/app/editor-light-1200.webp 1200w, Images/app/editor-light.webp 2000w" imagesizes="(max-width: 1068px) 100vw, 1020px" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,600;1,9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Structured data for search results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "NeatNote",
+      "operatingSystem": "Windows, macOS",
+      "applicationCategory": "ProductivityApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "9.99",
+        "priceCurrency": "USD"
+      },
+      "url": "https://theneatnote.com/",
+      "image": "https://theneatnote.com/Images/icon-512.png",
+      "softwareVersion": "1.1.0",
+      "description": "A lightweight, organized, local-first note-taking app for Windows and macOS."
+    }
+    </script>
+
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #07070e;
-            --bg-raised: #0d0d17;
-            --bg-card: #111119;
-            --bg-card-hover: #17171f;
-            --bg-elevated: #1c1c28;
+            --bg: #07080d;
+            --bg-raised: #0c0d14;
+            --bg-card: #11121a;
+            --bg-card-hover: #161822;
 
-            --cream: #ede9df;
-            --text: #dbd7cd;
-            --text-secondary: #908c82;
-            --text-muted: #5a5850;
+            --cream: #eceef6;
+            --text: #d5d8e3;
+            --text-secondary: #8f94a3;
+            --text-muted: #767b8c;
 
-            --gold: #c8944a;
-            --gold-light: #e4b770;
-            --gold-dim: rgba(200, 148, 74, 0.1);
-            --gold-glow: rgba(200, 148, 74, 0.2);
-            --gold-mid: rgba(200, 148, 74, 0.35);
+            /* Brand blue — the same family as the app icon and the app's accent */
+            --accent: #4263eb;          /* buttons (white text, AA contrast) */
+            --accent-light: #8ea3f9;    /* accent text on dark */
+            --accent-dim: rgba(93, 123, 245, 0.10);
+            --accent-glow: rgba(93, 123, 245, 0.22);
+            --accent-mid: rgba(93, 123, 245, 0.38);
 
             --green: #5ce0a0;
             --red: #ef6b6b;
-            --red-dim: rgba(239, 107, 107, 0.08);
 
-            --border: rgba(255, 255, 255, 0.05);
-            --border-light: rgba(255, 255, 255, 0.09);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-light: rgba(255, 255, 255, 0.10);
 
             --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-full: 100px;
             --serif: 'Fraunces', Georgia, serif;
             --sans: 'Manrope', system-ui, sans-serif;
         }
 
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-        body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        /* overflow-x on html as well as body: iOS Safari ignores body-only
+           overflow-x and allows horizontal panning. 'clip' is preferred
+           (no accidental scroll container); 'hidden' is the fallback. */
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-x: clip; }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; overflow-x: clip; }
         a { color: inherit; text-decoration: none; }
-        img { max-width: 100%; display: block; }
+        img { max-width: 100%; height: auto; display: block; }
         button { font-family: var(--sans); cursor: pointer; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-        body::after {
-            content: ''; position: fixed; inset: 0; z-index: 9999;
-            pointer-events: none; opacity: 0.025;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            background-size: 256px 256px;
-        }
+        :focus-visible { outline: 2px solid var(--accent-light); outline-offset: 3px; border-radius: 4px; }
 
-        .rv { opacity: 0; transform: translateY(36px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
+        .skip-link { position: absolute; left: 16px; top: -60px; z-index: 2000; padding: 10px 16px; background: var(--accent); color: #fff; font-weight: 700; border-radius: var(--r-sm); }
+        .skip-link:focus { top: 12px; }
+
+        .rv { opacity: 0; transform: translateY(32px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
         .rv.vis { opacity: 1; transform: translateY(0); }
         .rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}.rv-d3{transition-delay:.24s}
-        .rv-d4{transition-delay:.32s}.rv-d5{transition-delay:.4s}.rv-d6{transition-delay:.48s}
+        .rv-d4{transition-delay:.32s}.rv-d5{transition-delay:.4s}
+
+        /* Respect reduced-motion: no reveal animation, no smooth scroll */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .rv { opacity: 1; transform: none; transition: none; }
+            .feat-card, .btn-primary, .btn-ghost, .nav-buy, .price-buy, .hb-line, .show-frame img, .new-card { transition: none; }
+        }
 
         /* NAV */
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0 24px; border-bottom: 1px solid transparent; transition: background .4s, backdrop-filter .4s, border-color .4s; }
-        .nav.stuck { background: rgba(7,7,14,.82); backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3); border-bottom-color: var(--border); }
+        .nav.stuck { background: rgba(7,8,13,.84); backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3); border-bottom-color: var(--border); }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 70px; }
-        .logo { display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-weight: 800; font-size: 21px; letter-spacing: -.02em; color: var(--cream); }
-        .logo img { height: 30px; width: 30px; }
-        .logo i { font-style: normal; color: var(--gold); }
+        .logo { display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-weight: 800; font-size: 20px; letter-spacing: -.02em; color: var(--cream); }
+        .logo img { height: 32px; width: 32px; }
         .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
         .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-secondary); transition: color .2s; }
         .nav-links a:hover { color: var(--cream); }
-        .nav-buy { display: inline-flex; align-items: center; gap: 8px; padding: 9px 22px; background: var(--gold); color: var(--bg); font-weight: 700; font-size: 14px; border-radius: var(--r-full); border: none; transition: transform .2s, box-shadow .2s; }
-        .nav-buy:hover { transform: translateY(-1px); box-shadow: 0 8px 28px var(--gold-glow); }
-        .mob-btn { display: none; background: none; border: none; color: var(--cream); padding: 6px; }
+        .nav-buy { display: inline-flex; align-items: center; gap: 8px; padding: 9px 22px; background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; border-radius: var(--r-full); border: none; transition: transform .2s, box-shadow .2s, background .2s; }
+        .nav-buy:hover { transform: translateY(-1px); box-shadow: 0 8px 28px var(--accent-glow); background: #3a5be4; }
+
+        /* Animated hamburger: three bars morph into an X */
+        .mob-btn { display: none; background: none; border: none; width: 42px; height: 42px; padding: 0; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
+        .hb-line { display: block; width: 22px; height: 2px; background: var(--cream); border-radius: 2px; transition: transform .3s cubic-bezier(.16,1,.3,1), opacity .2s ease; }
+        .mob-btn.open .hb-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .mob-btn.open .hb-line:nth-child(2) { opacity: 0; transform: scaleX(.4); }
+        .mob-btn.open .hb-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         .nav-links.mob-open { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: var(--bg-raised); border-bottom: 1px solid var(--border); padding: 24px; gap: 20px; z-index: 100; }
+        .nav-links .mob-only { display: none; }
+        .nav-links.mob-open .mob-only { display: block; }
+        .nav-links.mob-open .mob-only a { color: var(--accent-light); font-weight: 700; }
 
         /* HERO */
-        .hero { position: relative; padding: 152px 0 100px; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -260px; left: 50%; transform: translateX(-50%); width: 1000px; height: 700px; background: radial-gradient(ellipse at center, var(--gold-mid) 0%, transparent 65%); pointer-events: none; opacity: .35; }
+        .hero { position: relative; padding: 148px 0 96px; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -280px; left: 50%; transform: translateX(-50%); width: 1100px; height: 760px; background: radial-gradient(ellipse at center, var(--accent-mid) 0%, transparent 64%); pointer-events: none; opacity: .32; }
         .hero-inner { position: relative; text-align: center; max-width: 820px; margin: 0 auto; }
-        .hero-pill { display: inline-flex; align-items: center; gap: 10px; padding: 7px 18px 7px 10px; background: var(--gold-dim); border: 1px solid rgba(200,148,74,.18); border-radius: var(--r-full); font-size: 13px; font-weight: 600; color: var(--gold-light); margin-bottom: 32px; }
-        .hero-pill .dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+        .hero-pill { display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px 7px 8px; background: var(--accent-dim); border: 1px solid rgba(93,123,245,.22); border-radius: var(--r-full); font-size: 13px; font-weight: 600; color: var(--accent-light); margin-bottom: 30px; transition: border-color .2s, background .2s; }
+        .hero-pill:hover { border-color: rgba(93,123,245,.4); background: rgba(93,123,245,.14); }
+        .hero-pill .tag { padding: 2px 9px; border-radius: var(--r-full); background: var(--accent); color: #fff; font-size: 11.5px; font-weight: 800; letter-spacing: .02em; }
+        .hero-pill .arrow { opacity: .7; }
         .hero h1 { font-family: var(--serif); font-size: clamp(40px, 5.8vw, 74px); font-weight: 800; line-height: 1.06; letter-spacing: -.035em; color: var(--cream); margin-bottom: 24px; }
-        .hero h1 em { font-style: italic; color: var(--gold); font-weight: 700; }
-        .hero-sub { font-size: 18px; color: var(--text-secondary); max-width: 580px; margin: 0 auto 36px; line-height: 1.75; }
+        .hero h1 em { font-style: italic; color: var(--accent-light); font-weight: 700; }
+        .hero-sub { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 36px; line-height: 1.75; }
         .hero-actions { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
-        .btn-gold { display: inline-flex; align-items: center; gap: 10px; padding: 15px 34px; background: var(--gold); color: var(--bg); font-weight: 700; font-size: 15px; border-radius: var(--r-full); border: none; transition: transform .25s, box-shadow .25s; }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 40px var(--gold-glow); }
-        .btn-gold svg { width: 18px; height: 18px; }
-        .btn-gold .price-tag { padding: 3px 10px; background: rgba(0,0,0,.2); border-radius: var(--r-full); font-size: 13px; font-weight: 800; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 15px 34px; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; border-radius: var(--r-full); border: none; transition: transform .25s, box-shadow .25s, background .25s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px var(--accent-glow); background: #3a5be4; }
+        .btn-primary .price-tag { padding: 3px 10px; background: rgba(0,0,0,.22); border-radius: var(--r-full); font-size: 13px; font-weight: 800; }
         .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; background: transparent; color: var(--text-secondary); font-weight: 600; font-size: 15px; border-radius: var(--r-full); border: 1px solid var(--border-light); transition: color .2s, border-color .2s, background .2s; }
-        .btn-ghost:hover { color: var(--cream); border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.03); }
+        .btn-ghost:hover { color: var(--cream); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.03); }
+        .btn-ghost svg { width: 16px; height: 16px; fill: currentColor; }
         .hero-note { font-size: 13px; color: var(--text-muted); margin-bottom: 56px; }
         .hero-img-wrap { position: relative; max-width: 1020px; margin: 0 auto; }
-        .hero-img-wrap::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(145deg, var(--gold-glow) 0%, transparent 45%, rgba(255,255,255,.04) 100%); border-radius: var(--r-lg); z-index: 0; }
-        .hero-img { position: relative; border-radius: var(--r-lg); overflow: hidden; z-index: 1; box-shadow: 0 50px 100px rgba(0,0,0,.55), 0 0 0 1px var(--border); }
-        .hero-img img { width: 100%; display: block; }
+        .hero-img-wrap::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(145deg, var(--accent-glow) 0%, transparent 45%, rgba(255,255,255,.05) 100%); border-radius: var(--r-lg); z-index: 0; }
+        .hero-img { position: relative; border-radius: var(--r-lg); overflow: hidden; z-index: 1; box-shadow: 0 50px 100px rgba(0,0,0,.55), 0 0 0 1px var(--border); aspect-ratio: 1280 / 800; background: #f6f5f1; }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .hero-stats { display: flex; justify-content: center; gap: 56px; margin-top: 52px; }
+        .hero-stat { text-align: center; }
         .hero-stat-num { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--cream); }
         .hero-stat-lbl { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 
@@ -105,71 +164,94 @@
         .s-pad { padding: 120px 0; }
         .s-bg { background: var(--bg-raised); }
         .s-line::before { content: ''; display: block; height: 1px; background: linear-gradient(90deg, transparent, var(--border-light), transparent); }
-        .eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--gold); margin-bottom: 14px; }
+        .eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--accent-light); margin-bottom: 14px; }
         .s-heading { font-family: var(--serif); font-size: clamp(30px, 4vw, 48px); font-weight: 700; letter-spacing: -.025em; line-height: 1.15; color: var(--cream); margin-bottom: 14px; }
-        .s-desc { color: var(--text-secondary); font-size: 17px; max-width: 520px; line-height: 1.75; }
+        .s-desc { color: var(--text-secondary); font-size: 17px; max-width: 540px; line-height: 1.75; }
         .s-center { text-align: center; }
         .s-center .s-desc { margin-left: auto; margin-right: auto; }
+
+        /* WHAT'S NEW */
+        .new-layout { display: grid; grid-template-columns: 1fr 1.25fr; gap: 64px; align-items: center; }
+        .new-list { display: grid; gap: 14px; margin-top: 32px; }
+        .new-card { display: grid; grid-template-columns: 40px 1fr; gap: 16px; padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-md); transition: border-color .3s, background .3s; }
+        .new-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
+        .new-card .ico { width: 40px; height: 40px; border-radius: 11px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; }
+        .new-card .ico svg { width: 20px; height: 20px; stroke: var(--accent-light); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .new-card h3 { font-size: 15.5px; font-weight: 700; color: var(--cream); margin-bottom: 3px; }
+        .new-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+        .new-card kbd, .feat-card kbd, .faq-a-inner kbd { font-family: var(--sans); font-size: 12px; font-weight: 700; padding: 1px 6px; border-radius: 5px; border: 1px solid var(--border-light); background: rgba(255,255,255,.04); color: var(--text); white-space: nowrap; }
+        .new-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--accent-light); }
+        .new-more:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+        /* Screenshot frame (shared by "what's new" and the gallery) */
+        .frame-wrap { position: relative; }
+        .frame-wrap::before { content: ''; position: absolute; inset: -1px; background: linear-gradient(135deg, var(--accent-glow), transparent 40%); border-radius: var(--r-lg); }
+        .frame { position: relative; border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 32px 64px rgba(0,0,0,.45), 0 0 0 1px var(--border); z-index: 1; }
+        .frame img { width: 100%; display: block; }
 
         /* FEATURES */
         .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
         .feat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-md); padding: 34px 28px; transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .3s, background .3s; position: relative; overflow: hidden; }
-        .feat-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold-glow), transparent); opacity: 0; transition: opacity .3s; }
+        .feat-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-glow), transparent); opacity: 0; transition: opacity .3s; }
         .feat-card:hover { transform: translateY(-5px); border-color: var(--border-light); background: var(--bg-card-hover); }
         .feat-card:hover::after { opacity: 1; }
-        .feat-icon { width: 46px; height: 46px; background: var(--gold-dim); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-        .feat-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .feat-icon { width: 46px; height: 46px; background: var(--accent-dim); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+        .feat-icon svg { width: 22px; height: 22px; stroke: var(--accent-light); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
         .feat-card h3 { font-size: 17px; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
         .feat-card p { color: var(--text-secondary); font-size: 14.5px; line-height: 1.65; }
 
         /* SWEET SPOT */
         .sweet-section { padding: 120px 0; }
         .sweet-spectrum { margin-top: 56px; padding: 48px 40px 36px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); }
-        .spectrum-track { position: relative; height: 4px; background: linear-gradient(90deg, rgba(239,107,107,.15), var(--gold-glow) 50%, rgba(239,107,107,.15)); border-radius: 2px; margin: 40px 40px 0; }
-        .spectrum-fill { position: absolute; left: 33%; right: 33%; height: 100%; background: var(--gold-glow); border-radius: 2px; }
+        .spectrum-track { position: relative; height: 4px; background: linear-gradient(90deg, rgba(239,107,107,.15), var(--accent-glow) 50%, rgba(239,107,107,.15)); border-radius: 2px; margin: 40px 40px 0; }
+        .spectrum-fill { position: absolute; left: 33%; right: 33%; height: 100%; background: var(--accent-glow); border-radius: 2px; }
         .spectrum-points { display: flex; justify-content: space-between; align-items: flex-start; margin: -14px 0 0; padding: 0 20px; }
         .sp-point { display: flex; flex-direction: column; align-items: center; text-align: center; width: 220px; }
         .sp-point:first-child { align-items: flex-start; text-align: left; }
         .sp-point:last-child { align-items: flex-end; text-align: right; }
         .sp-dot { width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--text-muted); background: var(--bg-card); margin-bottom: 14px; }
-        .sp-point.active .sp-dot { width: 28px; height: 28px; border: 4px solid var(--gold); box-shadow: 0 0 20px var(--gold-glow), 0 0 40px var(--gold-dim); margin-top: -5px; }
+        .sp-point.active .sp-dot { width: 28px; height: 28px; border: 4px solid var(--accent-light); box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-dim); margin-top: -5px; }
         .sp-name { font-family: var(--serif); font-weight: 700; font-size: 17px; color: var(--cream); margin-bottom: 4px; }
-        .sp-point.active .sp-name { color: var(--gold-light); font-size: 20px; }
+        .sp-point.active .sp-name { color: var(--accent-light); font-size: 20px; }
         .sp-tagline { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
         .sp-point.active .sp-tagline { color: var(--text-secondary); }
         .sp-label-row { display: flex; justify-content: space-between; margin-top: 8px; padding: 0 20px; }
         .sp-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
-        .sp-label.danger { color: var(--red); opacity: .4; }
-        .sp-label.good { color: var(--gold); }
+        .sp-label.danger { color: var(--red); opacity: .5; }
+        .sp-label.good { color: var(--accent-light); }
 
-        /* SCREENSHOTS */
-        .show-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 72px; align-items: center; }
+        /* SCREENSHOT GALLERY */
+        .show-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: center; }
         .show-tabs { display: flex; gap: 8px; margin-top: 32px; flex-wrap: wrap; }
-        .show-tab { padding: 9px 20px; border-radius: var(--r-full); border: 1px solid var(--border-light); background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600; transition: all .2s; }
-        .show-tab:hover { border-color: rgba(255,255,255,.16); color: var(--cream); }
-        .show-tab.on { background: var(--gold); border-color: var(--gold); color: var(--bg); }
-        .show-frame-wrap { position: relative; }
-        .show-frame-wrap::before { content: ''; position: absolute; inset: -1px; background: linear-gradient(135deg, var(--gold-glow), transparent 40%); border-radius: var(--r-lg); }
-        .show-frame { position: relative; border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 32px 64px rgba(0,0,0,.45), 0 0 0 1px var(--border); z-index: 1; }
-        .show-frame img { width: 100%; display: block; transition: opacity .45s ease; }
-        .show-frame img.hid { display: none; }
+        .show-tab { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--border-light); background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600; transition: all .2s; }
+        .show-tab:hover { border-color: rgba(255,255,255,.18); color: var(--cream); }
+        .show-tab.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .show-tab .sw { width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); flex-shrink: 0; }
+        .show-caption { margin-top: 18px; font-size: 14px; color: var(--text-muted); min-height: 1.6em; }
+        /* Grid-stack all screenshots in one cell: stable frame height + real opacity crossfade */
+        .show-frame { display: grid; }
+        .show-frame picture, .show-frame img { grid-area: 1 / 1; }
+        .show-frame img { width: 100%; display: block; opacity: 1; transition: opacity .45s ease; }
+        .show-frame img.hid { opacity: 0; pointer-events: none; }
 
         /* PRICING */
-        .price-section { padding: 120px 0; position: relative; }
-        .price-section::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 500px; background: radial-gradient(ellipse, var(--gold-dim), transparent 65%); pointer-events: none; opacity: .3; }
+        .price-section { padding: 120px 0; position: relative; overflow: hidden; }
+        .price-section::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 500px; background: radial-gradient(ellipse, var(--accent-dim), transparent 65%); pointer-events: none; opacity: .35; }
         .price-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; position: relative; z-index: 1; max-width: 880px; margin: 56px auto 0; }
-        .price-main { background: var(--bg-card); border: 2px solid var(--gold); border-radius: var(--r-lg); padding: 48px 40px; position: relative; overflow: hidden; }
-        .price-main::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
-        .price-badge { display: inline-block; padding: 5px 14px; background: var(--gold-dim); border-radius: var(--r-full); font-size: 12px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 24px; }
+        .price-main { background: var(--bg-card); border: 2px solid var(--accent); border-radius: var(--r-lg); padding: 48px 40px; position: relative; overflow: hidden; }
+        .price-main::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent)); }
+        .price-badge { display: inline-block; padding: 5px 14px; background: var(--accent-dim); border-radius: var(--r-full); font-size: 12px; font-weight: 700; color: var(--accent-light); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 24px; }
         .price-amount { font-family: var(--serif); font-size: 64px; font-weight: 900; color: var(--cream); line-height: 1; margin-bottom: 6px; }
         .price-amount sup { font-size: 32px; vertical-align: super; margin-right: 2px; }
         .price-amount .cents { font-size: 48px; }
-        .price-once { font-size: 16px; color: var(--gold-light); font-weight: 600; margin-bottom: 28px; }
+        .price-once { font-size: 16px; color: var(--accent-light); font-weight: 600; margin-bottom: 28px; }
         .price-features { list-style: none; margin-bottom: 32px; }
-        .price-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-secondary); padding: 8px 0; }
+        .price-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-secondary); padding: 7px 0; }
         .price-features li::before { content: '\2713'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-        .price-buy { display: block; width: 100%; padding: 16px; background: var(--gold); color: var(--bg); font-weight: 800; font-size: 16px; border: none; border-radius: var(--r-full); text-align: center; transition: transform .2s, box-shadow .2s; font-family: var(--sans); }
-        .price-buy:hover { transform: translateY(-2px); box-shadow: 0 12px 36px var(--gold-glow); }
+        .price-buy { display: block; width: 100%; padding: 16px; background: var(--accent); color: #fff; font-weight: 800; font-size: 16px; border: none; border-radius: var(--r-full); text-align: center; transition: transform .2s, box-shadow .2s, background .2s; font-family: var(--sans); }
+        .price-buy:hover { transform: translateY(-2px); box-shadow: 0 12px 36px var(--accent-glow); background: #3a5be4; }
+        .price-oss-note { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 12px; line-height: 1.6; }
+        .price-oss-note a { color: var(--accent-light); }
         .price-compare { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 48px 40px; display: flex; flex-direction: column; justify-content: center; }
         .price-compare h3 { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
         .price-compare > p { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
@@ -177,40 +259,46 @@
         .comp-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); }
         .comp-item:last-child { border-bottom: none; }
         .comp-name { font-size: 15px; font-weight: 500; color: var(--text-secondary); }
-        .comp-price { font-size: 15px; font-weight: 700; color: var(--red); opacity: .8; }
+        .comp-price { font-size: 15px; font-weight: 700; color: var(--red); opacity: .85; }
         .comp-price span { font-size: 12px; font-weight: 500; color: var(--text-muted); }
-        .price-math { margin-top: 28px; padding: 20px; background: var(--gold-dim); border-radius: var(--r-md); text-align: center; }
-        .price-math strong { display: block; font-family: var(--serif); font-size: 20px; color: var(--gold-light); }
+        .price-math { margin-top: 28px; padding: 20px; background: var(--accent-dim); border-radius: var(--r-md); text-align: center; }
+        .price-math strong { display: block; font-family: var(--serif); font-size: 20px; color: var(--accent-light); }
         .price-math span { font-size: 13px; color: var(--text-secondary); margin-top: 4px; display: block; }
+        .price-fine { font-size: 12px; color: var(--text-muted); margin-top: 16px; line-height: 1.5; }
 
-        /* TESTIMONIALS */
-        .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
-        .test-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-md); padding: 34px; transition: transform .3s cubic-bezier(.16,1,.3,1), border-color .3s; }
-        .test-card:hover { transform: translateY(-3px); border-color: var(--border-light); }
-        .test-stars { display: flex; gap: 3px; margin-bottom: 16px; }
-        .test-stars svg { width: 15px; height: 15px; fill: var(--gold); }
-        .test-card blockquote { font-size: 15px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 22px; font-style: italic; }
-        .test-author { display: flex; align-items: center; gap: 12px; }
-        .test-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--gold-dim); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; color: var(--gold); }
-        .test-name { font-weight: 700; font-size: 14px; color: var(--cream); }
-        .test-role { font-size: 12px; color: var(--text-muted); }
+        /* FROM THE DEVELOPER */
+        .story-card { max-width: 760px; margin: 56px auto 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 56px 56px 48px; position: relative; }
+        .story-card::before { content: '\201C'; position: absolute; top: 18px; left: 40px; font-family: var(--serif); font-size: 110px; line-height: 1; color: var(--accent-dim); font-weight: 900; pointer-events: none; }
+        .story-card p { font-size: 16.5px; line-height: 1.85; color: var(--text-secondary); margin-bottom: 20px; position: relative; }
+        .story-card p strong { color: var(--cream); font-weight: 700; }
+        .story-sign { display: flex; align-items: center; gap: 14px; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border); }
+        .story-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-dim); border: 1px solid rgba(93,123,245,.28); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 17px; color: var(--accent-light); }
+        .story-name { font-weight: 700; font-size: 15px; color: var(--cream); }
+        .story-role { font-size: 13px; color: var(--text-muted); }
+        .story-links { margin-left: auto; }
+        .story-links a { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: color .2s; }
+        .story-links a:hover { color: var(--accent-light); }
+        .story-links svg { width: 16px; height: 16px; fill: currentColor; }
 
         /* FAQ */
         .faq-list { max-width: 720px; margin: 56px auto 0; }
         .faq-item { border-bottom: 1px solid var(--border); }
         .faq-item:last-child { border-bottom: none; }
-        .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; cursor: pointer; user-select: none; font-weight: 600; font-size: 16px; color: var(--cream); transition: color .2s; background: none; border: none; width: 100%; text-align: left; font-family: var(--sans); }
-        .faq-q:hover { color: var(--gold-light); }
+        .faq-q { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; cursor: pointer; user-select: none; font-weight: 600; font-size: 16px; color: var(--cream); transition: color .2s; background: none; border: none; width: 100%; text-align: left; font-family: var(--sans); }
+        .faq-q:hover { color: var(--accent-light); }
         .faq-icon { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .25s, transform .35s, border-color .25s; }
         .faq-icon svg { width: 13px; height: 13px; stroke: var(--text-secondary); stroke-width: 2; fill: none; }
-        .faq-item.open .faq-icon { background: var(--gold); border-color: var(--gold); transform: rotate(45deg); }
-        .faq-item.open .faq-icon svg { stroke: var(--bg); }
+        .faq-item.open .faq-icon { background: var(--accent); border-color: var(--accent); transform: rotate(45deg); }
+        .faq-item.open .faq-icon svg { stroke: #fff; }
         .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.16,1,.3,1); }
         .faq-a-inner { padding-bottom: 22px; color: var(--text-secondary); font-size: 15px; line-height: 1.7; }
+        .faq-a-inner a { color: var(--accent-light); }
+        .faq-a-inner strong { color: var(--text); }
 
         /* FINAL CTA */
-        .final-cta { padding: 100px 0; text-align: center; position: relative; }
-        .final-cta::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 900px; height: 400px; background: radial-gradient(ellipse, var(--gold-glow), transparent 65%); pointer-events: none; opacity: .2; }
+        .final-cta { padding: 100px 0; text-align: center; position: relative; overflow: hidden; }
+        .final-cta::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 900px; height: 400px; background: radial-gradient(ellipse, var(--accent-glow), transparent 65%); pointer-events: none; opacity: .25; }
+        .final-icon { width: 76px; height: 76px; margin: 0 auto 26px; }
 
         /* FOOTER */
         footer { padding: 56px 0 28px; border-top: 1px solid var(--border); }
@@ -224,14 +312,15 @@
         .foot-bottom { padding-top: 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-muted); }
         .foot-socials { display: flex; gap: 16px; }
         .foot-socials a { color: var(--text-muted); transition: color .2s; }
-        .foot-socials a:hover { color: var(--gold); }
+        .foot-socials a:hover { color: var(--accent-light); }
         .foot-socials svg { width: 18px; height: 18px; fill: currentColor; }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
             .feat-grid { grid-template-columns: repeat(2, 1fr); }
-            .show-layout { grid-template-columns: 1fr; gap: 44px; }
+            .new-layout, .show-layout { grid-template-columns: 1fr; gap: 44px; }
             .show-layout > div:first-child { text-align: center; }
+            .show-layout .s-desc { margin-left: auto; margin-right: auto; }
             .show-tabs { justify-content: center; }
             .price-layout { grid-template-columns: 1fr; max-width: 500px; }
             .foot-grid { grid-template-columns: 1fr 1fr; }
@@ -239,11 +328,13 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .nav-buy.desk { display: none; }
-            .mob-btn { display: block; }
-            .hero { padding: 130px 0 64px; }
-            .hero h1 { font-size: 34px; }
-            .hero-stats { gap: 24px; flex-wrap: wrap; }
-            .feat-grid, .test-grid { grid-template-columns: 1fr; }
+            .mob-btn { display: flex; }
+            .hero { padding: 126px 0 64px; }
+            .hero h1 { font-size: 36px; }
+            .hero-sub { font-size: 16.5px; }
+            .hero-stats { gap: 28px 36px; flex-wrap: wrap; }
+            .s-pad, .sweet-section, .price-section { padding: 88px 0; }
+            .feat-grid { grid-template-columns: 1fr; }
             .spectrum-points { flex-direction: column; gap: 24px; align-items: center; }
             .sp-point, .sp-point:first-child, .sp-point:last-child { align-items: center; text-align: center; width: auto; }
             .spectrum-track { display: none; }
@@ -251,55 +342,77 @@
             .foot-grid { grid-template-columns: 1fr; gap: 28px; }
             .foot-bottom { flex-direction: column; gap: 14px; text-align: center; }
             .price-main, .price-compare { padding: 36px 28px; }
+            .story-card { padding: 44px 28px 36px; }
+            .story-card::before { left: 20px; font-size: 80px; }
+            .story-sign { flex-wrap: wrap; }
         }
         @media (max-width: 480px) {
             .hero-actions { flex-direction: column; }
             .hero-actions a { width: 100%; justify-content: center; text-align: center; }
+            .hero-pill { font-size: 12px; }
             .price-amount { font-size: 52px; }
             .price-amount .cents { font-size: 38px; }
         }
     </style>
+
+    <!-- If JavaScript is unavailable, reveal all content (reveal-on-scroll depends on JS) -->
+    <noscript>
+        <style>.rv { opacity: 1 !important; transform: none !important; }</style>
+    </noscript>
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
 
 <!-- NAV -->
 <header class="nav" id="nav">
     <div class="nav-inner">
-        <a href="#" class="logo"><img src="Images/NeatNoteLogo.png" alt="">NeatNote<i>.</i></a>
-        <nav><ul class="nav-links" id="navLinks">
+        <a href="#" class="logo" aria-label="NeatNote — back to top"><img src="Images/icon-192.png" alt="" width="32" height="32">NeatNote</a>
+        <nav aria-label="Main"><ul class="nav-links" id="navLinks">
             <li><a href="#features">Features</a></li>
+            <li><a href="#whats-new">What's new</a></li>
             <li><a href="#screenshots">Screenshots</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#faq">FAQ</a></li>
+            <li class="mob-only"><a href="#pricing">Buy — $9.99</a></li>
         </ul></nav>
         <a href="#pricing" class="nav-buy desk">Buy — $9.99</a>
-        <button class="mob-btn" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('mob-open')">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <button class="mob-btn" id="mobBtn" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+            <span class="hb-line"></span>
+            <span class="hb-line"></span>
+            <span class="hb-line"></span>
         </button>
     </div>
 </header>
+
+<main id="main">
 
 <!-- HERO -->
 <section class="hero">
     <div class="container">
         <div class="hero-inner">
-            <div class="hero-pill rv"><span class="dot"></span>v1.0.5 — Windows &amp; macOS</div>
+            <a href="#whats-new" class="hero-pill rv"><span class="tag">NEW</span>Version 1.1 — search inside every note <span class="arrow" aria-hidden="true">&rarr;</span></a>
             <h1 class="rv rv-d1">Notes without<br>the <em>nonsense</em></h1>
-            <p class="hero-sub rv rv-d2">Powerful enough to organize your life. Light enough to open in a heartbeat. NeatNote is the sweet spot between bare-bones editors and bloated note apps.</p>
+            <p class="hero-sub rv rv-d2">Folders, clean formatting, and search that finds what you actually wrote — in a focused app that keeps your notes as files on your own computer. No account. No subscription. No clutter.</p>
             <div class="hero-actions rv rv-d3">
-                <a href="#pricing" class="btn-gold">Get NeatNote <span class="price-tag">$9.99</span></a>
+                <a href="#pricing" class="btn-primary">Get NeatNote <span class="price-tag">$9.99</span></a>
                 <a href="#features" class="btn-ghost">See features</a>
             </div>
-            <p class="hero-note rv rv-d3">One-time purchase &middot; No subscription &middot; Yours forever</p>
+            <p class="hero-note rv rv-d3">Windows &amp; macOS &middot; One-time purchase &middot; Open source</p>
         </div>
         <div class="hero-img-wrap rv rv-d4">
-            <div class="hero-img"><img src="Images/MainImage.jpeg" alt="NeatNote App Interface"></div>
+            <div class="hero-img">
+                <picture>
+                    <source type="image/webp" srcset="Images/app/editor-light-1200.webp 1200w, Images/app/editor-light.webp 2000w" sizes="(max-width: 1068px) 100vw, 1020px">
+                    <img src="Images/app/editor-light.jpg" srcset="Images/app/editor-light-1200.jpg 1200w, Images/app/editor-light.jpg 2000w" sizes="(max-width: 1068px) 100vw, 1020px" width="2000" height="1250" alt="NeatNote showing a launch plan with headings, a numbered list and a code block, next to a sidebar of nested folders" fetchpriority="high">
+                </picture>
+            </div>
         </div>
         <div class="hero-stats rv rv-d5">
-            <div style="text-align:center"><div class="hero-stat-num">&lt;1s</div><div class="hero-stat-lbl">Startup time</div></div>
-            <div style="text-align:center"><div class="hero-stat-num">&lt;50MB</div><div class="hero-stat-lbl">Memory footprint</div></div>
-            <div style="text-align:center"><div class="hero-stat-num">100%</div><div class="hero-stat-lbl">Local &amp; private</div></div>
-            <div style="text-align:center"><div class="hero-stat-num">$9.99</div><div class="hero-stat-lbl">Forever. Not /month.</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-lbl">On your device</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">0</div><div class="hero-stat-lbl">Accounts or trackers</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-lbl">Handcrafted themes</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">$9.99</div><div class="hero-stat-lbl">Once. Not /month.</div></div>
         </div>
     </div>
 </section>
@@ -310,21 +423,49 @@
         <div class="s-center">
             <div class="eyebrow rv">Features</div>
             <h2 class="s-heading rv rv-d1">Everything you need.<br>Nothing you don't.</h2>
-            <p class="s-desc rv rv-d2">Built for people who want to write — not wrestle with feature-bloated software.</p>
+            <p class="s-desc rv rv-d2">Built for people who want to write — not configure, learn, or babysit their notes app.</p>
         </div>
         <div class="feat-grid">
-            <div class="feat-card rv"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Instant Startup</h3><p>Opens in under a second. No splash screens, no waiting — your notes are ready the moment you are.</p></div>
-            <div class="feat-card rv rv-d1"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div><h3>Nested Folders</h3><p>Organize with drag-and-drop folders and subfolders. Build the structure that matches how you think.</p></div>
-            <div class="feat-card rv rv-d2"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><h3>Markdown Support</h3><p>Write in Markdown with live formatting. Headers, lists, bold, code blocks — all rendered beautifully.</p></div>
-            <div class="feat-card rv rv-d3"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div><h3>12 Beautiful Themes</h3><p>Choose from 12 handcrafted themes — from clean Light and Dark modes to unique styles like Terminal, Ocean, and Pastel. Perfect for late-night writing sessions.</p></div>
-            <div class="feat-card rv rv-d4"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Privacy First</h3><p>Your notes never leave your device. No cloud, no accounts, no telemetry. Just your words, on your machine.</p></div>
-            <div class="feat-card rv rv-d5"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3>Windows &amp; macOS</h3><p>Same clean, consistent experience whether you're on a PC or a Mac. Linux support coming soon.</p></div>
+            <div class="feat-card rv"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M4 7V5h16v2"/><path d="M12 5v14"/><path d="M9 19h6"/></svg></div><h3>Clean, rich formatting</h3><p>Headings, bold and italic, bulleted and numbered lists, quotes, code blocks and links — from a simple toolbar or the shortcuts you already know.</p></div>
+            <div class="feat-card rv rv-d1"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div><h3>Folders, your way</h3><p>Nest folders as deep as you like. Drag to reorder or move, right-click to create, rename or reveal. Your layout is remembered between sessions.</p></div>
+            <div class="feat-card rv rv-d2"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.2" y2="16.2"/></svg></div><h3>Find anything</h3><p>Search looks inside every note, not just titles, and shows the line that matched. <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>P</kbd> and start typing.</p></div>
+            <div class="feat-card rv rv-d3"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></div><h3>Saves as you type</h3><p>Changes are saved automatically the moment you pause. Close the window mid-sentence and it's still there. Deleted notes go to your system trash, so they can be restored.</p></div>
+            <div class="feat-card rv rv-d4"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Private by design</h3><p>No cloud, no account, no telemetry. The app makes no network connections at all — even spell check works offline. Your notes are ordinary files you can open, copy and back up.</p></div>
+            <div class="feat-card rv rv-d5"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><h3>Never locked in</h3><p>Export any note to Markdown in one click and take it anywhere. And because NeatNote is open source, your app can't disappear on you either.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT'S NEW -->
+<section class="s-pad" id="whats-new">
+    <div class="container">
+        <div class="new-layout">
+            <div>
+                <div class="eyebrow rv">New in 1.1</div>
+                <h2 class="s-heading rv rv-d1">A big update.<br>Free for every owner.</h2>
+                <p class="s-desc rv rv-d2">Version 1.1 is the biggest NeatNote release yet: dozens of fixes, a full security review, and the features people asked for most.</p>
+                <div class="new-list">
+                    <div class="new-card rv rv-d2"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.2" y2="16.2"/></svg></div><div><h3>Full-text search</h3><p>Finds words inside your notes and highlights where they appear.</p></div></div>
+                    <div class="new-card rv rv-d3"><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><div><h3>Export to Markdown</h3><p>Save any note as a clean <code style="font-family:inherit">.md</code> file — <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>E</kbd>.</p></div></div>
+                    <div class="new-card rv rv-d4"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="13" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/></svg></div><div><h3>Right-click menus &amp; keyboard navigation</h3><p>Create notes inside folders, rename with <kbd>F2</kbd>, move through the sidebar with the arrow keys.</p></div></div>
+                    <div class="new-card rv rv-d5"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><div><h3>Safer than ever</h3><p>Edits made in another program are picked up — never overwritten — and your spacing and indentation are kept exactly as typed.</p></div></div>
+                </div>
+                <a class="new-more rv" href="https://github.com/Atravos/neatnote/releases" rel="noopener">Read the full release notes <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="frame-wrap rv rv-d2">
+                <div class="frame">
+                    <picture>
+                        <source type="image/webp" srcset="Images/app/search.webp">
+                        <img src="Images/app/search.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Searching for “launch” in NeatNote: three notes are listed, each with the matching text highlighted">
+                    </picture>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- SWEET SPOT -->
-<section class="sweet-section">
+<section class="sweet-section s-bg s-line">
     <div class="container">
         <div class="s-center">
             <div class="eyebrow rv">The Sweet Spot</div>
@@ -335,39 +476,46 @@
             <div class="spectrum-track"><div class="spectrum-fill"></div></div>
             <div class="spectrum-points">
                 <div class="sp-point"><div class="sp-dot"></div><div class="sp-name">Notepad</div><div class="sp-tagline">Type and save. That's it.<br>No folders, no formatting.</div></div>
-                <div class="sp-point active"><div class="sp-dot"></div><div class="sp-name">NeatNote ★</div><div class="sp-tagline">Organized. Markdown. Themes.<br>Fast, focused, and $9.99 forever.</div></div>
+                <div class="sp-point active"><div class="sp-dot"></div><div class="sp-name">NeatNote</div><div class="sp-tagline">Organized. Searchable. Private.<br>Open it and write.</div></div>
                 <div class="sp-point"><div class="sp-dot"></div><div class="sp-name">Notion / Obsidian</div><div class="sp-tagline">Databases, plugins, wikis.<br>Great power, steep learning curve.</div></div>
             </div>
             <div class="sp-label-row">
-                <div class="sp-label danger">Too simple &rarr;</div>
+                <div class="sp-label danger">Too simple</div>
                 <div class="sp-label good">Just right</div>
-                <div class="sp-label danger">&larr; Too complex</div>
+                <div class="sp-label danger">Too complex</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SCREENSHOTS -->
-<section class="s-pad s-bg s-line" id="screenshots">
+<!-- SCREENSHOT GALLERY -->
+<section class="s-pad" id="screenshots">
     <div class="container">
         <div class="show-layout">
             <div>
                 <div class="eyebrow rv">See it in action</div>
-                <h2 class="s-heading rv rv-d1">Twelve themes.<br>One gorgeous app.</h2>
-                <p class="s-desc rv rv-d2">Whether you write at midnight or midday, there's a look that fits. Switch themes in a single click.</p>
-                <div class="show-tabs rv rv-d3">
-                    <button class="show-tab on" data-img="img-light">Light</button>
-                    <button class="show-tab" data-img="img-dark">Dark</button>
-                    <button class="show-tab" data-img="img-folders">Folders</button>
-                    <button class="show-tab" data-img="img-settings">Settings</button>
+                <h2 class="s-heading rv rv-d1">Five themes.<br>One calm app.</h2>
+                <p class="s-desc rv rv-d2">Bright for the morning, dark for late nights, warm paper for long reads. Switch in one click from Settings.</p>
+                <div class="show-tabs rv rv-d3" role="group" aria-label="Choose a screenshot">
+                    <button class="show-tab on" data-img="img-light" data-caption="Light — clean and neutral." aria-pressed="true"><span class="sw" style="background:#f6f5f1"></span>Light</button>
+                    <button class="show-tab" data-img="img-dark" data-caption="Dark — cool graphite for late nights." aria-pressed="false"><span class="sw" style="background:#1c1e22"></span>Dark</button>
+                    <button class="show-tab" data-img="img-paper" data-caption="Paper — warm cream for long writing sessions." aria-pressed="false"><span class="sw" style="background:#f7f0e3"></span>Paper</button>
+                    <button class="show-tab" data-img="img-moss" data-caption="Moss — deep evergreen, easy on the eyes." aria-pressed="false"><span class="sw" style="background:#181f1a"></span>Moss</button>
+                    <button class="show-tab" data-img="img-dusk" data-caption="Dusk — soft violet after sunset." aria-pressed="false"><span class="sw" style="background:#1d1b27"></span>Dusk</button>
+                    <button class="show-tab" data-img="img-organize" data-caption="Right-click any folder to add notes, rename, or reveal it on disk." aria-pressed="false">Organize</button>
+                    <button class="show-tab" data-img="img-settings" data-caption="Settings: pick a theme, or open the folder where your notes live." aria-pressed="false">Settings</button>
                 </div>
+                <p class="show-caption rv rv-d3" id="showCaption" aria-live="polite">Light — clean and neutral.</p>
             </div>
-            <div class="show-frame-wrap rv rv-d2">
-                <div class="show-frame">
-                    <img id="img-light" src="Images/LightTheme.jpeg" alt="Light Theme">
-                    <img id="img-dark" src="Images/DarkTheme.jpeg" alt="Dark Theme" class="hid">
-                    <img id="img-folders" src="Images/FileStructure.jpeg" alt="Folder Structure" class="hid">
-                    <img id="img-settings" src="Images/SettingsPic.jpeg" alt="Settings" class="hid">
+            <div class="frame-wrap rv rv-d2">
+                <div class="frame show-frame">
+                    <img id="img-light" src="Images/app/editor-light-1200.jpg" width="1200" height="750" alt="NeatNote in the Light theme" loading="lazy" decoding="async">
+                    <img id="img-dark" data-src="Images/app/editor-dark.jpg" width="1600" height="1000" alt="NeatNote in the Dark theme" class="hid" decoding="async">
+                    <img id="img-paper" data-src="Images/app/editor-paper.jpg" width="1600" height="1000" alt="NeatNote in the Paper theme" class="hid" decoding="async">
+                    <img id="img-moss" data-src="Images/app/editor-moss.jpg" width="1600" height="1000" alt="NeatNote in the Moss theme" class="hid" decoding="async">
+                    <img id="img-dusk" data-src="Images/app/editor-dusk.jpg" width="1600" height="1000" alt="NeatNote in the Dusk theme" class="hid" decoding="async">
+                    <img id="img-organize" data-src="Images/app/organize.jpg" width="1600" height="1000" alt="The right-click menu on a folder in the NeatNote sidebar: new note, new folder, rename, show in Explorer, move to trash" class="hid" decoding="async">
+                    <img id="img-settings" data-src="Images/app/settings.jpg" width="1600" height="1000" alt="NeatNote settings with the five theme choices and a button to open the notes folder" class="hid" decoding="async">
                 </div>
             </div>
         </div>
@@ -375,7 +523,7 @@
 </section>
 
 <!-- PRICING -->
-<section class="price-section" id="pricing">
+<section class="price-section s-bg s-line" id="pricing">
     <div class="container">
         <div class="s-center">
             <div class="eyebrow rv">Pricing</div>
@@ -388,77 +536,81 @@
                 <div class="price-amount"><sup>$</sup>9<span class="cents">.99</span></div>
                 <div class="price-once">Pay once. Use forever.</div>
                 <ul class="price-features">
-                    <li>Nested folder &amp; file organization</li>
-                    <li>Full Markdown support</li>
-                    <li>12 themes — customize your writing experience</li>
-                    <li>Drag-and-drop everything</li>
-                    <li>Lightning-fast startup (&lt;1 second)</li>
-                    <li>100% local — your data stays yours</li>
-                    <li>Windows &amp; macOS included</li>
+                    <li>Nested folders with drag-and-drop</li>
+                    <li>Rich formatting: headings, lists, code, links</li>
+                    <li>Full-text search across every note</li>
+                    <li>Export to Markdown</li>
+                    <li>5 themes, light and dark</li>
+                    <li>100% local — no account, no tracking</li>
+                    <li>Windows &amp; macOS (Apple Silicon and Intel)</li>
                     <li>All future updates included</li>
+                    <li>14-day no-questions refund</li>
                 </ul>
                 <a href="https://buy.stripe.com/bJe9AS33Q14V67KgWB0RG00" class="price-buy">Buy NeatNote — $9.99</a>
-                <div style="text-align:center;font-size:13px;color:#908c82;margin-top:12px">Includes both Windows &amp; macOS</div>
+                <p class="price-oss-note">One purchase covers both Windows and macOS.<br>NeatNote is <a href="https://github.com/Atravos/neatnote" rel="noopener">open source</a> — you can always build it yourself for free. Buying gets you the ready-to-install apps and funds development.</p>
             </div>
             <div class="price-compare rv rv-d4">
                 <h3>Meanwhile, others charge...</h3>
-                <p>Most note apps lock you into monthly or yearly payments. Here's what "free" really costs.</p>
+                <p>Most note apps lock you into monthly or yearly payments. Here's what a paid year looks like elsewhere.</p>
                 <ul class="comp-list">
-                    <li class="comp-item"><span class="comp-name">Notion</span><span class="comp-price">$96 <span>/year</span></span></li>
-                    <li class="comp-item"><span class="comp-name">Evernote</span><span class="comp-price">$130 <span>/year</span></span></li>
-                    <li class="comp-item"><span class="comp-name">Obsidian Sync</span><span class="comp-price">$96 <span>/year</span></span></li>
-                    <li class="comp-item"><span class="comp-name">Bear</span><span class="comp-price">$30 <span>/year</span></span></li>
+                    <li class="comp-item"><span class="comp-name">Notion Plus</span><span class="comp-price">$120 <span>/year</span></span></li>
+                    <li class="comp-item"><span class="comp-name">Evernote</span><span class="comp-price">from $99 <span>/year</span></span></li>
+                    <li class="comp-item"><span class="comp-name">Obsidian Sync</span><span class="comp-price">from $48 <span>/year</span></span></li>
+                    <li class="comp-item"><span class="comp-name">Bear Pro</span><span class="comp-price">$30 <span>/year</span></span></li>
                 </ul>
                 <div class="price-math">
                     <strong>NeatNote: $9.99. Once.</strong>
-                    <span>That's less than one month of the alternatives.</span>
+                    <span>A single year of any of these costs 3&ndash;12&times; more. Every year.</span>
+                </div>
+                <p class="price-fine">Published annual-billing prices for one person, November 2026.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FROM THE DEVELOPER -->
+<section class="s-pad" id="story">
+    <div class="container">
+        <div class="s-center">
+            <div class="eyebrow rv">From the developer</div>
+            <h2 class="s-heading rv rv-d1">Built by one person.<br>On purpose.</h2>
+        </div>
+        <div class="story-card rv rv-d2">
+            <p>NeatNote exists because I couldn't find a note app that just let me write. Everything was either a blank text box or a second job — databases, plugins, sync accounts, subscription tiers. So I built the app I actually wanted: <strong>fast, organized, and completely mine.</strong></p>
+            <p>There's no company behind NeatNote. No investors, no growth team, no roadmap meeting deciding how to squeeze you into a subscription. It's one developer, a public GitHub repo, and people who think good software is worth ten bucks. <strong>Every purchase directly funds the next update</strong> — and if you'd rather build it from source for free, the code is right there.</p>
+            <div class="story-sign">
+                <div class="story-avatar" aria-hidden="true">R</div>
+                <div>
+                    <div class="story-name">Reese</div>
+                    <div class="story-role">Developer of NeatNote</div>
+                </div>
+                <div class="story-links">
+                    <a href="https://github.com/Atravos/neatnote" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.930 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> Read the source</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="s-pad s-bg s-line" id="testimonials">
-    <div class="container">
-        <div class="s-center">
-            <div class="eyebrow rv">Testimonials</div>
-            <h2 class="s-heading rv rv-d1">Loved by people<br>who love to write</h2>
-        </div>
-        <div class="test-grid">
-            <div class="test-card rv">
-                <div class="test-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
-                <blockquote>"I spent more time organizing my notes than actually writing them. NeatNote stripped away the noise — now I just write."</blockquote>
-                <div class="test-author"><div class="test-avatar">D</div><div><div class="test-name">David K.</div><div class="test-role">Writer</div></div></div>
-            </div>
-            <div class="test-card rv rv-d1">
-                <div class="test-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
-                <blockquote>"My old note app took forever to load and put everything in the cloud. NeatNote is instant and my notes never leave my machine. Perfect."</blockquote>
-                <div class="test-author"><div class="test-avatar">S</div><div><div class="test-name">Sarah J.</div><div class="test-role">Student</div></div></div>
-            </div>
-            <div class="test-card rv rv-d2">
-                <div class="test-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
-                <blockquote>"I switch between Windows and Mac daily. NeatNote gives me the same clean experience on both. And for ten bucks? Absolute no-brainer."</blockquote>
-                <div class="test-author"><div class="test-avatar">M</div><div><div class="test-name">Michael T.</div><div class="test-role">Developer</div></div></div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- FAQ -->
-<section class="s-pad" id="faq">
+<section class="s-pad s-bg s-line" id="faq">
     <div class="container">
         <div class="s-center">
             <div class="eyebrow rv">FAQ</div>
             <h2 class="s-heading rv rv-d1">Questions &amp; answers</h2>
         </div>
         <div class="faq-list">
-            <div class="faq-item rv"><button class="faq-q"><span>What do I get for $9.99?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">The full NeatNote app for both Windows and macOS — no feature restrictions. You also get all future updates included at no extra cost. Pay once, use it forever.</div></div></div>
-            <div class="faq-item rv rv-d1"><button class="faq-q"><span>Is there a subscription or recurring fee?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">No. $9.99 is the complete price. No monthly fees, no annual renewals, no "premium tier" upsells. You buy it once and it's yours.</div></div></div>
-            <div class="faq-item rv rv-d2"><button class="faq-q"><span>Where are my notes stored?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Locally on your device, always. NeatNote never uploads your notes to a server. Your data stays on your machine, accessible even without internet.</div></div></div>
-            <div class="faq-item rv"><button class="faq-q"><span>What file formats does it support?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">NeatNote supports Markdown (.md) with live formatting and plain text (.txt) files. More formats are planned for future updates.</div></div></div>
-            <div class="faq-item rv rv-d1"><button class="faq-q"><span>Can I sync notes across devices?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">NeatNote is local-first by design. You can sync by placing your notes folder inside Dropbox, Google Drive, or iCloud.</div></div></div>
-            <div class="faq-item rv rv-d2"><button class="faq-q"><span>Is there a free trial?</span><span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">We're working on a trial version. In the meantime, NeatNote is open-source on GitHub — you can review the code and see exactly what you're getting before you buy.</div></div></div>
+            <div class="faq-item rv"><button class="faq-q" aria-expanded="false"><span>What do I get for $9.99?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Ready-to-install NeatNote apps for both Windows and macOS — no feature restrictions, all future updates included, and a 14-day no-questions refund if it's not for you. Pay once, use it forever.</div></div></div>
+            <div class="faq-item rv rv-d1"><button class="faq-q" aria-expanded="false"><span>Is there a subscription or recurring fee?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">No. $9.99 is the complete price. No monthly fees, no annual renewals, no "premium tier" upsells. You buy it once and it's yours.</div></div></div>
+            <div class="faq-item rv rv-d2"><button class="faq-q" aria-expanded="false"><span>I already own NeatNote. Is 1.1 free?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Yes — updates are included with your purchase. Download 1.1 from the link in your purchase email (or the <a href="https://github.com/Atravos/neatnote/releases" rel="noopener">releases page</a>) and install it over your current version. Your notes, folders and settings carry over.</div></div></div>
+            <div class="faq-item rv"><button class="faq-q" aria-expanded="false"><span>Wait — isn't NeatNote free on GitHub?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">It is! NeatNote is fully open source, and if you're comfortable building from source, you're welcome to — no strings attached. The $9.99 buys you the prebuilt, ready-to-install apps for Windows and macOS with updates included, and it directly funds development. The code is open; the convenience is paid.</div></div></div>
+            <div class="faq-item rv rv-d1"><button class="faq-q" aria-expanded="false"><span>Where are my notes stored?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">On your computer, as ordinary files in a folders-and-files layout that mirrors the sidebar. <strong>Settings &rarr; Open notes folder</strong> takes you straight there. NeatNote never uploads anything, and it works fully offline.</div></div></div>
+            <div class="faq-item rv rv-d2"><button class="faq-q" aria-expanded="false"><span>What file formats does it use?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Formatted notes are saved as standard HTML files that any browser can open. Plain text (<code>.txt</code>) files open and stay plain text. Any note can be exported to Markdown (<code>.md</code>) with one click.</div></div></div>
+            <div class="faq-item rv"><button class="faq-q" aria-expanded="false"><span>Can I sync notes across devices?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Not built in — NeatNote is local-first by design, and there's no NeatNote cloud. Because your notes are plain files, you can copy or back them up with any tool you already use. If a note is changed outside NeatNote while it's open, the app picks up the change, and if both versions were edited it keeps a copy of each instead of overwriting either.</div></div></div>
+            <div class="faq-item rv rv-d1"><button class="faq-q" aria-expanded="false"><span>Windows or macOS warns me when I open it. Is that normal?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Yes, on first launch. NeatNote is made by an independent developer, and the operating systems warn about apps that aren't from a registered publisher. <strong>Windows:</strong> click <em>More info</em>, then <em>Run anyway</em>. <strong>macOS:</strong> open NeatNote once, then go to <em>System Settings &rarr; Privacy &amp; Security</em> and click <em>Open Anyway</em>. You only need to do this once — and the source code is public if you'd like to check what you're running.</div></div></div>
+            <div class="faq-item rv rv-d2"><button class="faq-q" aria-expanded="false"><span>Is there a Linux version?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Not an official one yet. NeatNote builds and runs on Linux from <a href="https://github.com/Atravos/neatnote" rel="noopener">the source code</a>, and official Linux downloads are planned.</div></div></div>
+            <div class="faq-item rv"><button class="faq-q" aria-expanded="false"><span>Is there a free trial?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">In a way, the whole app is — since NeatNote is <a href="https://github.com/Atravos/neatnote" rel="noopener">open source</a>, you can build and run it from the source code before deciding to buy. If you'd rather skip the build step, $9.99 gets you the installers, and there's a 14-day no-questions refund if it's not for you.</div></div></div>
+            <div class="faq-item rv rv-d1"><button class="faq-q" aria-expanded="false"><span>What's the refund policy?</span><span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">14 days, no questions asked. Email <a href="mailto:theneatnoteapp@gmail.com">theneatnoteapp@gmail.com</a> with your order email and you'll get a full refund.</div></div></div>
         </div>
     </div>
 </section>
@@ -466,33 +618,33 @@
 <!-- FINAL CTA -->
 <section class="final-cta" id="download">
     <div class="container" style="position:relative;z-index:1">
-        <div class="eyebrow rv">Ready?</div>
+        <img class="final-icon rv" src="Images/icon-192.png" alt="" width="76" height="76" loading="lazy">
         <h2 class="s-heading rv rv-d1">Your notes deserve better.</h2>
-        <p class="s-desc rv rv-d2" style="margin:0 auto 36px">Stop fighting your tools. NeatNote is fast, organized, private, and yours forever — for less than the price of lunch.</p>
+        <p class="s-desc rv rv-d2" style="margin:0 auto 36px">Fast, organized, private, and yours forever — for less than the price of lunch.</p>
         <div class="rv rv-d3" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-            <a href="https://buy.stripe.com/bJe9AS33Q14V67KgWB0RG00" class="btn-gold">
-                Buy NeatNote — $9.99
-            </a>
-            <a href="https://github.com/Atravos/neatnote" class="btn-ghost">View source on GitHub</a>
+            <a href="https://buy.stripe.com/bJe9AS33Q14V67KgWB0RG00" class="btn-primary">Buy NeatNote — $9.99</a>
+            <a href="https://github.com/Atravos/neatnote" class="btn-ghost" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.930 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>View source on GitHub</a>
         </div>
-        <p class="rv rv-d4" style="font-size:13px;color:#5a5850;margin-top:14px">One purchase includes both Windows &amp; macOS</p>
+        <p class="rv rv-d4" style="font-size:13px;color:var(--text-muted);margin-top:14px">One purchase includes both Windows &amp; macOS &middot; 14-day refund</p>
     </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
     <div class="container">
         <div class="foot-grid">
-            <div class="foot-brand"><div class="logo"><img src="Images/NeatNoteLogo.png" alt="">NeatNote<i>.</i></div><p>A lightweight, organized note-taking app that respects your privacy and stays out of your way.</p></div>
-            <div class="foot-col"><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#screenshots">Screenshots</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-            <div class="foot-col"><h4>Resources</h4><ul><li><a href="https://github.com/Atravos/neatnote">GitHub</a></li><li><a href="#">Documentation</a></li><li><a href="#">Changelog</a></li></ul></div>
-            <div class="foot-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">License</a></li></ul></div>
+            <div class="foot-brand"><div class="logo"><img src="Images/icon-192.png" alt="" width="32" height="32" loading="lazy">NeatNote</div><p>A lightweight, organized note-taking app that respects your privacy and stays out of your way.</p></div>
+            <div class="foot-col"><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#whats-new">What's new</a></li><li><a href="#screenshots">Screenshots</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+            <div class="foot-col"><h4>Resources</h4><ul><li><a href="https://github.com/Atravos/neatnote" rel="noopener">GitHub</a></li><li><a href="https://github.com/Atravos/neatnote#readme" rel="noopener">Documentation</a></li><li><a href="https://github.com/Atravos/neatnote/releases" rel="noopener">Release notes</a></li></ul></div>
+            <div class="foot-col"><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="https://github.com/Atravos/neatnote/blob/master/LICENSE" rel="noopener">License</a></li></ul></div>
         </div>
         <div class="foot-bottom">
             <span>&copy; 2026 NeatNote. All rights reserved.</span>
             <div class="foot-socials">
-                <a href="https://github.com/Atravos" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-                <a href="mailto:contact@theneatnote.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+                <a href="https://github.com/Atravos" aria-label="GitHub" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.930 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+                <a href="mailto:theneatnoteapp@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
             </div>
         </div>
     </div>
@@ -501,42 +653,112 @@
 <script>
 (function(){
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 40), {passive:true});
+    const navLinks = document.getElementById('navLinks');
+    const mobBtn = document.getElementById('mobBtn');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const onScroll = () => nav.classList.toggle('stuck', scrollY > 40);
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    function closeMobileMenu() {
+        navLinks.classList.remove('mob-open');
+        mobBtn.classList.remove('open');
+        mobBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = navLinks.classList.toggle('mob-open');
+        mobBtn.classList.toggle('open', open);
+        mobBtn.setAttribute('aria-expanded', String(open));
+    });
+
+    // Close mobile menu on outside click or Escape
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('mob-open') && !navLinks.contains(e.target) && !mobBtn.contains(e.target)) closeMobileMenu();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobileMenu(); });
+
+    // Smooth-scroll for in-page anchors (logo href="#" scrolls to top)
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
-            e.preventDefault();
             const id = a.getAttribute('href');
-            if (id === '#') return;
+            const behavior = reducedMotion ? 'auto' : 'smooth';
+            if (id === '#') { e.preventDefault(); scrollTo({top: 0, behavior}); closeMobileMenu(); return; }
             const el = document.querySelector(id);
-            if (el) { scrollTo({top: el.offsetTop - 72, behavior:'smooth'}); document.getElementById('navLinks').classList.remove('mob-open'); }
+            if (!el) return;
+            e.preventDefault();
+            scrollTo({top: el.getBoundingClientRect().top + scrollY - 72, behavior});
+            closeMobileMenu();
+            // Keep keyboard focus with the content the link pointed at
+            if (id === '#main') { el.setAttribute('tabindex', '-1'); el.focus({preventScroll: true}); }
         });
     });
 
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); }});
-    }, {threshold:.1, rootMargin:'0px 0px -30px 0px'});
-    document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+    // Reveal-on-scroll
+    if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+        }, {threshold: .1, rootMargin: '0px 0px -30px 0px'});
+        document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+    } else {
+        document.querySelectorAll('.rv').forEach(el => el.classList.add('vis'));
+    }
 
-    document.querySelectorAll('.show-tab').forEach(tab => {
+    // Screenshot gallery — class toggle only; CSS grid stacking handles the crossfade.
+    // Non-default screenshots load on first hover/focus/click so they don't
+    // slow down the first visit.
+    const tabs = document.querySelectorAll('.show-tab');
+    const caption = document.getElementById('showCaption');
+    const loadImage = (img) => { if (img && img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };
+    const tabImage = (tab) => document.getElementById(tab.dataset.img);
+
+    tabs.forEach(tab => {
+        ['pointerenter', 'focus'].forEach(ev => tab.addEventListener(ev, () => loadImage(tabImage(tab)), {once: true}));
         tab.addEventListener('click', () => {
-            document.querySelectorAll('.show-tab').forEach(t => t.classList.remove('on'));
+            tabs.forEach(t => { t.classList.remove('on'); t.setAttribute('aria-pressed', 'false'); });
             tab.classList.add('on');
-            const target = tab.dataset.img;
-            document.querySelectorAll('.show-frame img').forEach(img => {
-                img.classList.toggle('hid', img.id !== target);
-                img.style.display = img.id === target ? 'block' : 'none';
-            });
+            tab.setAttribute('aria-pressed', 'true');
+            const target = tabImage(tab);
+            loadImage(target);
+            document.querySelectorAll('.show-frame img').forEach(img => img.classList.toggle('hid', img !== target));
+            caption.textContent = tab.dataset.caption || '';
         });
     });
 
+    // Once the page is idle, fetch the remaining screenshots in the background
+    const prefetch = () => tabs.forEach(tab => loadImage(tabImage(tab)));
+    if ('requestIdleCallback' in window) requestIdleCallback(prefetch, {timeout: 4000});
+    else setTimeout(prefetch, 3000);
+
+    // FAQ accordion — releases max-height after opening so content survives window resizes
     document.querySelectorAll('.faq-q').forEach(q => {
+        const item = q.closest('.faq-item');
+        const ans = item.querySelector('.faq-a');
+
+        ans.addEventListener('transitionend', () => {
+            if (item.classList.contains('open')) ans.style.maxHeight = 'none';
+        });
+
         q.addEventListener('click', () => {
-            const item = q.closest('.faq-item');
-            const ans = item.querySelector('.faq-a');
-            const open = item.classList.contains('open');
-            document.querySelectorAll('.faq-item').forEach(fi => { fi.classList.remove('open'); fi.querySelector('.faq-a').style.maxHeight = null; });
-            if (!open) { item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+            const wasOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.faq-item').forEach(fi => {
+                const a = fi.querySelector('.faq-a');
+                if (fi.classList.contains('open')) {
+                    a.style.maxHeight = a.scrollHeight + 'px'; // pin current height so the close transition works
+                    requestAnimationFrame(() => { a.style.maxHeight = '0px'; });
+                }
+                fi.classList.remove('open');
+                fi.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+            });
+
+            if (!wasOpen) {
+                item.classList.add('open');
+                q.setAttribute('aria-expanded', 'true');
+                ans.style.maxHeight = reducedMotion ? 'none' : ans.scrollHeight + 'px';
+            }
         });
     });
 })();
