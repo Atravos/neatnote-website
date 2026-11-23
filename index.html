@@ -194,6 +194,13 @@ footer{border-top:1px solid var(--line);padding:30px 0 34px;font-size:13px;color
  .keys div{grid-template-columns:1fr;gap:4px}.duo,.price,.why{grid-template-columns:1fr}.bins{grid-template-columns:1fr 1fr 1fr;gap:8px}
  .foot{grid-template-columns:1fr 1fr}.chip .tip{max-width:200px}
 }
+/* Big monitors: scale the whole page so the column fills more of the screen and stays readable */
+@media (min-width:1500px){body{zoom:1.12}}
+@media (min-width:1750px){body{zoom:1.25}}
+@media (min-width:2050px){body{zoom:1.42}}
+@media (min-width:2400px){body{zoom:1.62}}
+@media (min-width:3000px){body{zoom:1.95}}
+@media (min-width:3600px){body{zoom:2.3}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
     </style>
 </head>
@@ -417,11 +424,13 @@ footer{border-top:1px solid var(--line);padding:30px 0 34px;font-size:13px;color
         }); });
     });
 
+    function zoomOf(){ var z=parseFloat(getComputedStyle(document.body).zoom); return z>0?z:1; }
+
     // Hero sticky notes can be dragged around
     document.querySelectorAll('.sticky').forEach(function(s){
-        var sx,sy,ox=0,oy=0,rot=getComputedStyle(s).transform;
-        s.addEventListener('pointerdown', function(e){ sx=e.clientX-ox; sy=e.clientY-oy; s.setPointerCapture(e.pointerId); });
-        s.addEventListener('pointermove', function(e){ if(!s.hasPointerCapture(e.pointerId)) return; ox=e.clientX-sx; oy=e.clientY-sy; s.style.transform='translate('+ox+'px,'+oy+'px) '+(rot==='none'?'':rot); });
+        var Z=1,sx,sy,ox=0,oy=0,rot=getComputedStyle(s).transform;
+        s.addEventListener('pointerdown', function(e){ Z=zoomOf(); sx=e.clientX/Z-ox; sy=e.clientY/Z-oy; s.setPointerCapture(e.pointerId); });
+        s.addEventListener('pointermove', function(e){ if(!s.hasPointerCapture(e.pointerId)) return; ox=e.clientX/Z-sx; oy=e.clientY/Z-sy; s.style.transform='translate('+ox+'px,'+oy+'px) '+(rot==='none'?'':rot); });
     });
 
     // "File these notes": drag (or tap, or press Enter on) a note to put it in a folder
@@ -434,11 +443,11 @@ footer{border-top:1px solid var(--line);padding:30px 0 34px;font-size:13px;color
         loose.innerHTML=''; bins.forEach(function(b){ b.innerHTML=''; });
         NOTES.forEach(function(n){
             var c=document.createElement('span'); c.className='note-chip'; c.tabIndex=0; c.setAttribute('role','button'); c.setAttribute('aria-label','File the note "'+n[0]+'"'); c.innerHTML=ICON+n[0];
-            var moved=false, dx, dy, ph=null;
-            c.addEventListener('pointerdown', function(e){ if(c.parentNode!==loose) return; moved=false; var r=c.getBoundingClientRect(); dx=e.clientX-r.left; dy=e.clientY-r.top; c.setPointerCapture(e.pointerId); });
+            var moved=false, dx, dy, ph=null, Z=1;
+            c.addEventListener('pointerdown', function(e){ if(c.parentNode!==loose) return; moved=false; Z=zoomOf(); var r=c.getBoundingClientRect(); dx=e.clientX-r.left; dy=e.clientY-r.top; c.setPointerCapture(e.pointerId); });
             c.addEventListener('pointermove', function(e){ if(!c.hasPointerCapture(e.pointerId)) return;
-                if(!moved){ moved=true; var r=c.getBoundingClientRect(); ph=document.createElement('span'); ph.style.cssText='display:inline-block;width:'+r.width+'px;height:'+r.height+'px'; loose.insertBefore(ph,c); c.style.width=r.width+'px'; c.classList.add('drag'); }
-                c.style.left=(e.clientX-dx)+'px'; c.style.top=(e.clientY-dy)+'px';
+                if(!moved){ moved=true; var r=c.getBoundingClientRect(); ph=document.createElement('span'); ph.style.cssText='display:inline-block;width:'+(r.width/Z)+'px;height:'+(r.height/Z)+'px'; loose.insertBefore(ph,c); c.style.width=(r.width/Z)+'px'; c.classList.add('drag'); }
+                c.style.left=((e.clientX-dx)/Z)+'px'; c.style.top=((e.clientY-dy)/Z)+'px';
                 bins.forEach(function(b){ var r=b.getBoundingClientRect(); b.classList.toggle('over', e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top-20&&e.clientY<r.bottom); }); });
             c.addEventListener('pointerup', function(e){ if(c.parentNode!==loose) return; var hit=bins.filter(function(b){ return b.classList.contains('over'); })[0]; bins.forEach(function(b){ b.classList.remove('over'); });
                 if(ph){ ph.remove(); ph=null; }
