@@ -9,32 +9,28 @@
     <link rel="icon" href="/favicon.ico?v=2" sizes="any">
     <link rel="icon" href="/Images/icon-192.png?v=2" type="image/png" sizes="192x192">
     <link rel="icon" href="Images/icon.svg?v=2" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <script>try{if(localStorage.getItem('nn-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #07080d;
-            --bg-raised: #0c0d14;
-            --bg-card: #11121a;
-            --cream: #eceef6;
-            --text: #d5d8e3;
-            --text-secondary: #8f94a3;
-            --text-muted: #767b8c;
-            --accent: #4263eb;
-            --accent-light: #8ea3f9;
-            --accent-dim: rgba(93, 123, 245, 0.10);
-            --accent-glow: rgba(93, 123, 245, 0.22);
-            --accent-mid: rgba(93, 123, 245, 0.38);
-            --green: #5ce0a0;
-            --border: rgba(255, 255, 255, 0.05);
-            --border-light: rgba(255, 255, 255, 0.09);
-            --r-md: 14px; --r-lg: 20px; --r-full: 100px;
-            --serif: 'Fraunces', Georgia, serif;
-            --sans: 'Manrope', system-ui, sans-serif;
+            --bg: #f3eee3; --bg-card: #fbf8f1; --bg-raised: #fbf8f1; --bg-card-hover: #fbf8f1; --cream: #231f1a; --text: #231f1a;
+            --text-secondary: #6b6257; --text-muted: #6b6257;
+            --accent: #231f1a; --accent-light: #2f47c2; --accent-dim: rgba(240,165,42,.14); --accent-glow: rgba(240,165,42,.25); --accent-mid: rgba(240,165,42,.3);
+            --green: #2c7a4b; --red: #b4442f;
+            --border: #d9cfbd; --border-light: #d9cfbd;
+            --r-sm: 8px; --r-md: 10px; --r-lg: 12px; --r-full: 9px;
+            --serif: 'Lora', Georgia, serif; --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
+        html[data-theme=dark] {
+            --bg: #121316; --bg-card: #1a1c21; --bg-raised: #1a1c21; --bg-card-hover: #1a1c21; --cream: #ece9e1; --text: #ece9e1;
+            --text-secondary: #99958b; --text-muted: #99958b; --accent: #f0a52a; --accent-light: #9db0ff;
+            --green: #6fd39a; --red: #f08a76; --border: #2c2f37; --border-light: #2c2f37;
+            --serif: 'JetBrains Mono', ui-monospace, monospace;
+        }
+        body { background-image: radial-gradient(rgba(128,120,100,.14) 1px, transparent 1px); background-size: 22px 22px; }
+        html[data-theme=dark] .btn-primary, html[data-theme=dark] .nav-buy { color: #1a1305 !important; }
 
         html { -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-x: clip; }
         body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; overflow-x: hidden; overflow-x: clip; }
