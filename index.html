@@ -91,6 +91,7 @@ h1 u,h2 u{text-decoration:none;background:linear-gradient(transparent 62%,var(--
 .b1 i{font-style:normal;opacity:.72;margin-left:6px;font:500 12.5px var(--mono)}
 .b2{display:inline-block;padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--card);font-weight:700;font-size:14px}.b2:hover{border-color:var(--soft)}
 .small{margin-top:14px;font-size:12px;color:var(--soft)}
+.trailer{margin-top:10px;font-size:13px}.trailer a{display:inline-flex;align-items:center;gap:7px;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--amber);padding-bottom:1px}.trailer a:hover{color:var(--amber)}.trailer svg{width:14px;height:14px;fill:currentColor}
 .shot{position:relative}
 .frame{border-radius:10px;border:1px solid var(--line);box-shadow:8px 8px 0 var(--line);overflow:hidden;background:#f6f5f1;aspect-ratio:1440/900}
 .shot .frame{aspect-ratio:1280/800}
@@ -220,12 +221,13 @@ footer{border-top:1px solid var(--line);padding:30px 0 34px;font-size:13px;color
 <div class="wrap">
 <section class="hero">
     <div>
-        <a class="ver" href="https://github.com/Atravos/neatnote/releases/tag/v1.4.0" rel="noopener"><b>v1.4</b> · now on Linux</a>
+        <a class="ver" href="https://github.com/Atravos/neatnote/blob/master/CHANGELOG.md" rel="noopener"><b>v1.4</b> · now on Linux</a>
         <h1>A scratchpad that <u>stays organized</u>.</h1>
         <div class="plat">Notes for <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Windows</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v9H4z"/><path d="M2 19h20"/></svg>macOS</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M12 15h5"/></svg>Linux</span></div>
         <p class="sub">Jot and paste as quickly as in a plain text file, then drag what's worth keeping into folders. No account. No subscription.</p>
         <div class="cta"><a href="#pricing" class="b1">Get NeatNote <i>$9.99 once</i></a><a href="#paste" class="b2">See how it works</a></div>
         <p class="small">Notes are plain files on your computer · Open source · 14-day refund</p>
+        <p class="trailer"><a href="https://youtu.be/wotghBrgH8Q" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the 50-second trailer</a></p>
     </div>
     <div class="shot">
         <div class="frame"><video class="demo-video" autoplay muted loop playsinline preload="auto" width="2000" height="1250" poster="Images/app/demo-poster.jpg" aria-label="NeatNote in action: ticking off a checklist item, switching a title to a handwriting font, adding a row to a table, and changing themes — next to a sidebar of nested folders"><source src="Images/app/demo-1200.mp4" type="video/mp4" media="(max-width: 700px)"><source src="Images/app/demo.mp4" type="video/mp4"></video></div>
@@ -379,7 +381,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 34px;font-size:13px;color
     <div class="foot">
         <div><div class="logo"><img src="Images/icon-192.png?v=2" alt="" width="26" height="26" loading="lazy">NeatNote</div><p>A scratchpad that stays organized. Your notes stay as files on your own computer.</p><a class="foot-badge" href="https://alternativeto.net/software/neatnote/about/?utm_source=badge&amp;utm_medium=referral" target="_blank" rel="noopener"><img src="Images/alternativeto-badge.svg" alt="NeatNote | AlternativeTo" width="132" height="45" loading="lazy"></a></div>
         <div><h4>Product</h4><ul><li><a href="#paste">How it works</a></li><li><a href="#write">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-        <div><h4>Resources</h4><ul><li><a href="https://github.com/Atravos/neatnote" rel="noopener">GitHub</a></li><li><a href="https://github.com/Atravos/neatnote#readme" rel="noopener">Documentation</a></li><li><a href="https://github.com/Atravos/neatnote/releases" rel="noopener">Release notes</a></li></ul></div>
+        <div><h4>Resources</h4><ul><li><a href="https://github.com/Atravos/neatnote" rel="noopener">GitHub</a></li><li><a href="https://github.com/Atravos/neatnote#readme" rel="noopener">Documentation</a></li><li><a href="https://github.com/Atravos/neatnote/blob/master/CHANGELOG.md" rel="noopener">Release notes</a></li></ul></div>
         <div><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="https://github.com/Atravos/neatnote/blob/master/LICENSE" rel="noopener">License</a></li></ul></div>
     </div>
     <div class="foot-bot"><span>&copy; 2026 NeatNote. All rights reserved.</span><div><a href="https://github.com/Atravos" aria-label="GitHub" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.930 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><a href="mailto:theneatnoteapp@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a></div></div>
